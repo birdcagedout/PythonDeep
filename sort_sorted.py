@@ -69,3 +69,31 @@ org = ['321', '214', '1970', '44', '1']
 cpy = sorted(org, key=int)
 print(cpy)
 
+
+
+# 8-1. sorted(): 문자열로 표현된 숫자들 + 에러요소(,) 첨가1
+org = ['321', '214', '197,0', '44', '1']
+# cpy = sorted(org, key=int)					# ValueError: invalid literal for int() with base 10: '197,0'
+org2 = [x.replace(',', '') for x in org]		# replace되거나/말거나 결과값을 리턴함
+print(org2)
+cpy = sorted(org2, key=int)
+print(cpy)
+
+
+
+# 8-2. sorted(): 문자열로 표현된 숫자들 + 에러요소(.) 첨가2
+org = ['3.21', '214', '197.0', '44', '1']
+# cpy = sorted(org, key=int)					# ValueError: invalid literal for int() with base 10: '3.21'
+
+org2 = []
+for val in org:
+	try:
+		ret = int(val)
+	except ValueError:
+		ret = float(val)
+	org2.append(ret)
+
+print(org2)
+
+cpy = sorted(org2, key=lambda x: x)
+print(cpy)
